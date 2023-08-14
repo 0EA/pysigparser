@@ -2,7 +2,6 @@
 module to extract Name information from signature
 """
 import re
-import string
 
 signature_statements = (
     "warm regards",
@@ -24,7 +23,7 @@ signature_statements = (
     "sent from my iphone"
 )
 
-person_name_regexp = re.compile(r'(' + string.join(signature_statements, "|") + ')[^\s]*\s([\w ]+)\s', re.IGNORECASE)
+person_name_regexp = re.compile(r'(' + '|'.join(signature_statements) + ')[^\s]*\s([\w ]+)\s', re.IGNORECASE)
 
 def run(input, output):
     matched = person_name_regexp.findall(input)

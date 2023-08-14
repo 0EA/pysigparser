@@ -4,6 +4,10 @@ Signatures parser
 import types
 import parser_modules
 
+import json
+
+
+
 class SignatureParser:
     """
     Parses text input to get information about a person
@@ -31,3 +35,23 @@ class SignatureParser:
             result = module.run(input, result)
 
         return result
+    
+
+_SigParser = SignatureParser()
+def parse_signature(input_text):
+    """
+    extracts the signature information using SignatureParser
+    """
+    return json.dumps(_SigParser.get_information(input_text))
+
+
+sig_filename = input("Give path name:")
+signature=None
+try:
+    signature = open(sig_filename, "r").read()
+    print(parse_signature(signature))
+except IOError:
+        print("Cannot open {} for reading".format(sig_filename))
+
+
+
